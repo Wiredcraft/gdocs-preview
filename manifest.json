@@ -1,0 +1,19 @@
+{
+  "name": "GHDocs Embed",
+  "description": "Use the Google Doc viewer for files linked in GitHub issues",
+  "version": "1",
+  "manifest_version": 2,
+  "content_scripts": [{
+    "js": ["contentscript.js"],
+    "matches": [
+      "*://github.com/*/*/issues/*",
+      "*://github.com/*/*/pulls/*",
+      "*://github.com/*/*/milestones/*"
+    ],
+    "all_frames": true
+  }],
+  "web_accessible_resources": [
+    "frame.html",
+    "script.js"
+  ]
+}
