@@ -1,14 +1,20 @@
 // Avoid recursive frame insertion...
 var extensionOrigin = 'chrome-extension://' + chrome.runtime.id;
 if (!location.ancestorOrigins.contains(extensionOrigin)) {
+  // Supported File Types
+  var fileTypes = ['.pdf', '.doc', '.xls', '.ppt'];
+
   var links = document.getElementsByTagName('a');
   var pdfLinks = [];
 
   Object.keys(links).forEach(function (id) {
     var link = links[id];
-    if (link.href.indexOf('.pdf') > -1 || link.href.indexOf('.doc') > -1) {
-      pdfLinks.push(link);
-    }
+    fileTypes.some(function (ext) {
+      if (link.href.indexOf(ext) > -1) {
+        pdfLinks.push(link);
+        return true;
+      }
+    });
   });
 
   pdfLinks.forEach(function (link) {
