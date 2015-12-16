@@ -1,7 +1,7 @@
 {
   "name": "GH Preview",
   "description": "Use the Google Doc viewer for files linked in GitHub issues",
-  "version": "0.2",
+  "version": "0.3",
   "manifest_version": 2,
   "content_scripts": [{
     "js": ["contentscript.js"],

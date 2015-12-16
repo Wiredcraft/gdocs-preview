@@ -1,10 +1,28 @@
 function getLocationParam () {
-  return window.location.search.replace('?url=', '')
+  // Google Doc
+  if (window.location.search.indexOf('?doc=') > -1) {
+    return { type: 'doc', url: window.location.search.replace('?doc=', '') }
+  }
+
+  // Other file
+  if (window.location.search.indexOf('?url-') > -1) {
+    return { type: 'file', url: window.location.search.replace('?url=', '') }
+  }
 };
 
-function generateIframe(url) {
+function generateIframe(link) {
   var iframe = document.createElement('iframe')
-  iframe.src = 'https://docs.google.com/gview?embedded=true&url=' + url
+
+  // Google Doc
+  if (link.type === 'doc') {
+    iframe.src = link.url
+  }
+
+  // Other file
+  if (link.type === 'file') {
+    iframe.src = 'https://docs.google.com/gview?embedded=true&url=' + url
+  }
+
   return iframe
 };
 
