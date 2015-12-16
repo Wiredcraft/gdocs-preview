@@ -6,7 +6,7 @@ if (!location.ancestorOrigins.contains(extensionOrigin)) {
 
   Object.keys(links).forEach(function (id) {
     var link = links[id];
-    if (link.href.indexOf('.pdf') > -1 || link.href.indexOf('.doc')) {
+    if (link.href.indexOf('.pdf') > -1 || link.href.indexOf('.doc') > -1) {
       pdfLinks.push(link);
     }
   });
