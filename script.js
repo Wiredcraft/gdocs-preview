@@ -5,7 +5,7 @@ function getLocationParam () {
   }
 
   // Other file
-  if (window.location.search.indexOf('?url-') > -1) {
+  if (window.location.search.indexOf('?url=') > -1) {
     return { type: 'file', url: window.location.search.replace('?url=', '') }
   }
 };
@@ -20,7 +20,7 @@ function generateIframe(link) {
 
   // Other file
   if (link.type === 'file') {
-    iframe.src = 'https://docs.google.com/gview?embedded=true&url=' + url
+    iframe.src = 'https://docs.google.com/gview?embedded=true&url=' + link.url
   }
 
   return iframe
