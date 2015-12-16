@@ -1,5 +1,5 @@
 {
-  "name": "GHDocs Embed",
+  "name": "GH Preview",
   "description": "Use the Google Doc viewer for files linked in GitHub issues",
   "version": "1",
   "manifest_version": 2,

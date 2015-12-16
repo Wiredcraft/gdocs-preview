@@ -1,4 +1,4 @@
-# GHDocs Embed
+# GH Preview
 
 ### Easily view linked PDF files in your GitHub Issues (or pull requests and milestones)
 
