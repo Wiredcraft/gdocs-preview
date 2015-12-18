@@ -16,4 +16,4 @@
  - Why an iframe within a iframe? [See here](http://stackoverflow.com/questions/24641592/injecting-iframe-into-page-with-restrictive-content-security-policy)
 
 #### Is it working?
-If you have installed the page you should see the preview for the [pdf linked here](http://gdocs-preview-pdf.surge.sh/atlassian_git_cheatsheet.pdf)
+If you have installed the extension you should see the gdocs-preview frame below for the [pdf linked here](http://gdocs-preview-pdf.surge.sh/atlassian_git_cheatsheet.pdf)
