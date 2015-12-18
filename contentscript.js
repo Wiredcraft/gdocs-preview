@@ -25,6 +25,10 @@ if (!location.ancestorOrigins.contains(extensionOrigin)) {
       })
     })
 
+    function iframeStyle (width) {
+      return 'display:block;height:600px;width:' + width + 'px;z-index:99999;border:none;margin-top:10px;margin-bottom:10px;'
+    }
+
     fileLinks.forEach(function (link) {
       var iframe = document.createElement('iframe')
 
@@ -32,7 +36,7 @@ if (!location.ancestorOrigins.contains(extensionOrigin)) {
       iframe.src = chrome.runtime.getURL('frame.html') + '?url=' + link.href
 
       // Basic Style
-      iframe.style.cssText = 'display:block;height:600px;width:664px;z-index:99999;border:none;margin-top:10px;margin-bottom:10px;'
+      iframe.style.cssText = iframeStyle(link.parentElement.clientWidth)
 
       // Insert after Link to include in Google doc viewer
       link.parentNode.insertBefore(iframe, link.nextSibling)
@@ -45,7 +49,7 @@ if (!location.ancestorOrigins.contains(extensionOrigin)) {
       iframe.src = chrome.runtime.getURL('frame.html') + '?doc=' + link.href
 
       // Basic Style
-      iframe.style.cssText = 'display:block;height:600px;width:664px;z-index:99999;border:none;margin-top:10px;margin-bottom:10px;'
+      iframe.style.cssText = iframeStyle(link.parentElement.clientWidth)
 
       // Insert after Link to include in Google doc viewer
       link.parentNode.insertBefore(iframe, link.nextSibling)
