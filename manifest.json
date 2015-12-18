@@ -6,9 +6,7 @@
   "content_scripts": [{
     "js": ["contentscript.js"],
     "matches": [
-      "*://github.com/*/*/issues/*",
-      "*://github.com/*/*/pulls/*",
-      "*://github.com/*/*/milestones/*"
+      "*://*/*"
     ],
     "all_frames": true
   }],
