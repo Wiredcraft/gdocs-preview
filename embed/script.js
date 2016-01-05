@@ -12,7 +12,7 @@ function generateIframe(link) {
   var iframe = document.createElement('iframe')
 
   // Google Doc
-  if (link.type === 'doc') {
+  if (link.type === 'gdoc') {
     iframe.src = link.href
   }
 
