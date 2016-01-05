@@ -39,7 +39,7 @@ if (!location.ancestorOrigins.contains(extensionOrigin)) {
       var iframe = document.createElement('iframe')
 
       // Must be declared at web_accessible_resources in manifest.json
-      iframe.src = chrome.runtime.getURL('embed/frame.html') + '?type=' + item.type + '&href=' + item.link.href
+      iframe.src = chrome.runtime.getURL('embed/frame.html') + '?type=' + item.type + '&href=' + encodeURIComponent(item.link.href)
 
       // Basic Style
       iframe.style.cssText = iframeStyle(item.link.parentElement.clientWidth)

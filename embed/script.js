@@ -3,8 +3,9 @@ function getJsonFromUrl() {
   var result = {};
   query.split("&").forEach(function(part) {
     var item = part.split("=");
-    result[item[0]] = decodeURIComponent(item[1]);
+    result[item[0]] = item[1];
   });
+  result.href = decodeURIComponent(result.href)
   return result;
 };
 
