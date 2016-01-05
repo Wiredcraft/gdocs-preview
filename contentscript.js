@@ -73,4 +73,17 @@ if (!location.ancestorOrigins.contains(extensionOrigin)) {
   window.addEventListener('onbeforeunload', function () {
     clearInterval(interval)
   })
+
+  /*
+    Works great for triggering insertPreviews() BUT need to track whether embed is already inserted as to not insert duplicates
+  */
+  // Meta request listener
+  // chrome.runtime.onMessage.addListener(
+  //   function(request, sender, sendResponse) {
+  //     if (request.type === 'update') {
+  //       insertPreviews()
+  //       sendResponse({ meta: { href: window.location.href } });
+  //     }
+  //   }
+  // )
 }
