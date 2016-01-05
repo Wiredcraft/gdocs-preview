@@ -19,18 +19,18 @@
   ],
   "browser_action": {
     "default_icon": {
-      "19": "img/gdocs-preview_48.png",
-      "38": "img/gdocs-preview_48.png"
+      "19": "assets/img/gdocs-preview_48.png",
+      "38": "assets/img/gdocs-preview_48.png"
     },
     "default_popup": "popup.html"
   },
   "icons": {
-    "16": "img/gdocs-preview_16.png",
-    "48": "img/gdocs-preview_48.png",
-    "128": "img/gdocs-preview_128.png"
+    "16": "assets/img/gdocs-preview_16.png",
+    "48": "assets/img/gdocs-preview_48.png",
+    "128": "assets/img/gdocs-preview_128.png"
   },
   "web_accessible_resources": [
-    "frame.html",
-    "script.js"
+    "embed/frame.html",
+    "embed/script.js"
   ]
 }
