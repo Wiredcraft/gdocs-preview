@@ -5,7 +5,7 @@ if (!location.ancestorOrigins.contains(extensionOrigin)) {
   // Inserts gdocs-preview(s) on page
   function insertPreviews () {
     // Supported File Types
-    var fileTypes = ['.pdf', '.doc', '.xls', '.ppt', 'docs.google.com']
+    var fileTypes = ['.pdf', '.doc', '.xls', '.ppt', 'docs.google.com', 'drive.google.com']
 
     var links = document.getElementsByTagName('a')
     var fileLinks = []
@@ -15,7 +15,7 @@ if (!location.ancestorOrigins.contains(extensionOrigin)) {
       var link = links[id]
       fileTypes.some(function (ext) {
         if (link.href.indexOf(ext) > -1) {
-          if (ext === 'docs.google.com') {
+          if (ext === 'docs.google.com' || ext === 'drive.google.com') {
             gDocsLinks.push(link)
           } else {
             fileLinks.push(link)
