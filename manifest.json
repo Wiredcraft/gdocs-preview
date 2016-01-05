@@ -3,13 +3,32 @@
   "description": "Use the Google Doc viewer for files linked in GitHub issues",
   "version": "0.5",
   "manifest_version": 2,
-  "content_scripts": [{
-    "js": ["contentscript.js"],
-    "matches": [
-      "*://*/*"
-    ],
-    "all_frames": true
-  }],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "background" : {
+    "scripts" : ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["contentscript.js"]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/gdocs-preview_48.png",
+      "38": "img/gdocs-preview_48.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/gdocs-preview_16.png",
+    "48": "img/gdocs-preview_48.png",
+    "128": "img/gdocs-preview_128.png"
+  },
   "web_accessible_resources": [
     "frame.html",
     "script.js"

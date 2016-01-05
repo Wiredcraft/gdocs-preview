@@ -8,23 +8,40 @@ html, body, iframe {
     height: 100vh;
     background: white;
     color: black;
+    overflow-y: hidden;
 }
-div {
-    margin-bottom: 5px;
-}
-small {
+#controls {
     width: 100vw;
     height: 25px;
-    font-size: 10px;
     background: rgb(209, 209, 209);
-    padding: 5px;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 }
+small {
+    font-size: 1em;
+    padding: 5px;
+    line-height: 2em;
+}
+
+.close {
+    text-decoration: none;
+    color: black;
+    float: right;
+    line-height: 2em;
+    padding: 0px 5px;
+}
+
+.close > i {
+    font-size: 1.5em;
+}
+
 iframe {
     height: calc(100vh - 25px);
 }
 </style>
 <div id='viewer'></div>
-<small>File embed powered by the Google Docs Viewer &amp; the gdocs-preview extension</small>
+<div id='controls'>
+    <small>File embed powered by the Google Docs Viewer &amp; the gdocs-preview extension</small>
+    <a href='#' class='close'>Close <i>&times;</i></a>
+</div>
 <script src='script.js'></script> 

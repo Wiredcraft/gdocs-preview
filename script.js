@@ -1,13 +1,11 @@
-function getLocationParam () {
-  // Google Doc
-  if (window.location.search.indexOf('?doc=') > -1) {
-    return { type: 'doc', url: window.location.search.replace('?doc=', '') }
-  }
-
-  // Other file
-  if (window.location.search.indexOf('?url=') > -1) {
-    return { type: 'file', url: window.location.search.replace('?url=', '') }
-  }
+function getJsonFromUrl() {
+  var query = location.search.substr(1);
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
 };
 
 function generateIframe(link) {
@@ -15,17 +13,17 @@ function generateIframe(link) {
 
   // Google Doc
   if (link.type === 'doc') {
-    iframe.src = link.url
+    iframe.src = link.href
   }
 
   // Other file
   if (link.type === 'file') {
-    iframe.src = 'https://docs.google.com/gview?embedded=true&url=' + link.url
+    iframe.src = 'https://docs.google.com/gview?embedded=true&url=' + link.href
   }
 
   return iframe
 };
 
-var iframe = generateIframe(getLocationParam())
+var iframe = generateIframe(getJsonFromUrl())
 
 document.getElementById('viewer').appendChild(iframe)

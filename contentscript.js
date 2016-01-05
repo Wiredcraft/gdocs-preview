@@ -2,6 +2,14 @@
 var extensionOrigin = 'chrome-extension://' + chrome.runtime.id
 if (!location.ancestorOrigins.contains(extensionOrigin)) {
 
+  var port = chrome.runtime.connect({name: "gdocspreview"});
+  // port.onMessage.addListener(function(msg) {
+  //   console.log('CS received:', msg)
+  // });
+
+
+  var activeEmbeds = [];
+
   // Inserts gdocs-preview(s) on page
   function insertPreviews () {
     // Supported File Types
@@ -9,17 +17,15 @@ if (!location.ancestorOrigins.contains(extensionOrigin)) {
 
     var links = document.getElementsByTagName('a')
     var fileLinks = []
-    var gDocsLinks = []
 
     Object.keys(links).forEach(function (id) {
       var link = links[id]
       fileTypes.some(function (ext) {
         if (link.href.indexOf(ext) > -1) {
-          if (ext === 'docs.google.com') {
-            gDocsLinks.push(link)
-          } else {
-            fileLinks.push(link)
-          }
+          fileLinks.push({
+            type: ext === 'docs.google.com' ? 'gdoc' : 'file',
+            link: link
+          })
           return true
         }
       })
@@ -29,31 +35,25 @@ if (!location.ancestorOrigins.contains(extensionOrigin)) {
       return 'display:block;height:600px;width:' + width + 'px;z-index:99999;border:none;margin-top:10px;margin-bottom:10px;'
     }
 
-    fileLinks.forEach(function (link) {
+    activeEmbeds = fileLinks.map(function (item) {
       var iframe = document.createElement('iframe')
 
       // Must be declared at web_accessible_resources in manifest.json
-      iframe.src = chrome.runtime.getURL('frame.html') + '?url=' + link.href
+      iframe.src = chrome.runtime.getURL('frame.html') + '?type=' + item.type + '&href=' + item.link.href
 
       // Basic Style
-      iframe.style.cssText = iframeStyle(link.parentElement.clientWidth)
+      iframe.style.cssText = iframeStyle(item.link.parentElement.clientWidth)
 
       // Insert after Link to include in Google doc viewer
-      link.parentNode.insertBefore(iframe, link.nextSibling)
+      item.link.parentNode.insertBefore(iframe, item.link.nextSibling)
+
+      return { iframe: iframe }
     })
 
-    gDocsLinks.forEach(function (link) {
-      var iframe = document.createElement('iframe')
-
-      // Must be declared at web_accessible_resources in manifest.json
-      iframe.src = chrome.runtime.getURL('frame.html') + '?doc=' + link.href
-
-      // Basic Style
-      iframe.style.cssText = iframeStyle(link.parentElement.clientWidth)
-
-      // Insert after Link to include in Google doc viewer
-      link.parentNode.insertBefore(iframe, link.nextSibling)
-    })
+    // Set badgeText to embed count
+    if (activeEmbeds.length > 0) {
+      port.postMessage({ type: 'badgeCount', count: activeEmbeds.length});
+    }
   }
 
   // Insert previews on page load
